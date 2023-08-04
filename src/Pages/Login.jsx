@@ -26,7 +26,7 @@ const Login = () => {
       localStorage.setItem("token", token)  
       setLoading(false)   
       if(response.status === 200) {
-         navigate('/')
+         navigate('/uploadprofile')
       }
       }catch(err) {
          alert(err.response.data.message) 
