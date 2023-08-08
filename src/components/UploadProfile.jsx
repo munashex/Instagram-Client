@@ -2,7 +2,7 @@ import React from 'react'
 import {useState, useEffect} from 'react' 
 import axios from 'axios'
 import Login from '../Pages/Login'
-import { Link, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 
 let instagramImage = 'https://1000logos.net/wp-content/uploads/2017/02/Logo-Instagram.png' 
 
@@ -12,6 +12,15 @@ function UploadProfile() {
 const [bio, setBio] = useState('') 
 const [image, setImage] = useState(null) 
 const [loading, setLoading] = useState(false)    
+
+const token = localStorage.getItem("token") 
+
+useEffect(() => {
+  if(token) {
+    navigate('/') 
+    return
+  }
+}, [])
 
 useEffect(() => {
   if(bio.length >= 31) { 
@@ -32,7 +41,8 @@ const handleSubmit = async(e) => {
    formData.append("image", image) 
   formData.append("bio", bio) 
 
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token") 
+
    const response = await axios.post('http://localhost:3001/user/profile', formData, {
     headers: {
       "Content-Type": "multipart/form-data", 
@@ -52,17 +62,17 @@ const handleSubmit = async(e) => {
     {
       currentUser ? (
         <div>
-        <div className="max-w-sm w-[90%] border md:max-w-lg mx-auto  my-7 p-4 ]"> 
+        <div className="max-w-sm w-[90%] border-t border-b md:border md:max-w-lg mx-auto  my-7 p-4 ]"> 
         <div className="flex justify-center">
           <img src={instagramImage} alt="instram" className="w-[50%]"/>
         </div>
           <form className="space-y-5 my-4" onSubmit={handleSubmit}>
     
-            <div className="flex flex-col items-center gap-y-2">
+            <div className="flex flex-col items-center gap-y-2 ">
               <label className="text-lg" htmlFor='profile'>Prolife photo</label> 
               <input type="file" accept='image/*' 
-              className=" file:text-white  
-              file:bg-[blue] file:border-none file:rounded-md file:px-2 file-py-1"  
+              className="file:text-white  
+              file:bg-[blue] file:border-none file:rounded-md file:px-1 file-py-1"  
               onChange={(e) => setImage(e.target.files[0])} 
               id="profile"  
               required

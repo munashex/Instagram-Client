@@ -22,8 +22,11 @@ const Login = () => {
             "Content-Type": "application/json"
          }
       })  
-      const {token} = response.data 
-      localStorage.setItem("token", token)  
+      
+      const {_id} = response.data.user
+      const {token} = response.data  
+      localStorage.setItem("token", token)   
+      localStorage.setItem("userId", _id)
       setLoading(false)   
       if(response.status === 200) {
          navigate('/uploadprofile')

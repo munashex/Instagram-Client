@@ -9,6 +9,9 @@ import CreatePost from "./Pages/CreatePost"
 import VideoUpload  from "./components/VideoUpload" 
 import ImageUpload from "./components/ImageUpload" 
 import UserImages from "./Pages/UserImages"
+import SingleImage from "./Pages/SingleImage" 
+import UserVideos from "./Pages/UserVideos"
+import EditProfile from "./Pages/EditProfile"
 
 const App = () => {
 
@@ -23,7 +26,10 @@ const App = () => {
       <Route path="/" element={<Navbar/>}>  
       <Route index element={<Home/>}/>
       <Route path="profile"  element={<Profile/>}> 
-      <Route  index element={<UserImages/>}/> 
+      <Route  index element={<UserImages/>}/>  
+      <Route path="videos" element={<UserVideos/>}/> 
+      <Route path="editprofile" element={<EditProfile/>}/>
+      <Route path="singleimage/:imageId" element={<SingleImage/>}/>
       </Route>
       
       <Route path="create" element={<CreatePost/>}>

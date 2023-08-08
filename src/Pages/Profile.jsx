@@ -3,9 +3,14 @@ import axios from 'axios';
 import Loader from '../components/Loader';
 import { IoIosArrowBack } from 'react-icons/io';
 import { HiOutlineUser } from 'react-icons/hi';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { useNavigate, Outlet, Link } from 'react-router-dom'; 
+import {useSelector} from 'react-redux'
 
 const Profile = () => {
+  
+  const {images} = useSelector((state) => state.userImages) 
+
+
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -15,6 +20,8 @@ const Profile = () => {
   if (!token) {
     navigate('/login');
   }
+
+  
 
   const getUserInfo = async () => {
     try {
@@ -72,10 +79,10 @@ const Profile = () => {
 
                     <div className="flex flex-col gap-y-2">
                       <div className="flex flex-row gap-x-3">
-                        <button className="bg-gray-200 px-2 rounded-md text-lg">Edit</button>
+                        <Link to="editprofile" className="bg-black text-white rouned-md px-2 rounded-md text-lg">Edit</Link>
                         <h1 className="text-lg">{user?.user?.name}</h1>
                       </div>
-                      <h1 className="font-semibold">{item.bio}</h1>
+                      <h1>{item.bio}</h1>
                     </div>
                   </div>
                 </div>
@@ -96,16 +103,22 @@ const Profile = () => {
                   <div className="grid grid-cols-1">
                     <div className="flex gap-x-4">
                       <h1 className="text-lg font-semibold">{user?.user?.username}</h1>
-                      <button className="bg-gray-200 px-2 rounded-md text-lg">Edit Profile</button>
+                      <Link to="editprofile" className="bg-black text-white py-1 px-2 rounded-md text-lg">Edit Profile</Link>
                     </div>
                     <div className="flex gap-x-6 my-4">
-                    <h1 className="text-lg text-slate-600 ">Images</h1>
-                    <h1 className="text-lg text-slate-600">Video</h1>
-                     <h1 className="text-lg text-slate-600">followers</h1>
-                     <h1 className="text-lg text-slate-600">following</h1>
+
+                    <Link to="" className="text-lg"> 
+                    <span className="font-semibold text-black">{images?.images?.length}</span> 
+                      {images?.images?.length === 1 ? ' image' : ' images'}
+                     </Link> 
+                     
+                     <Link to="videos" className="text-lg">video</Link>
+                     <h1 className="text-lg">followers</h1>
+                     <h1 className="text-lg">following</h1>
                     </div>
                     <h1 className="text-lg">{user?.user?.name}</h1>
-                    <h1 className="font-semibold">{item.bio}</h1>
+                    <h1>{item.bio}</h1>
+
                   </div>
                 </div>
               ))}
@@ -113,10 +126,14 @@ const Profile = () => {
         </div>
       )}
       <div className="flex lg:hidden items-center md:justify-center justify-between md:mx-0 mx-4 md:gap-x-12 my-4">
-      <h1 className="text-lg text-slate-600 ">Images</h1>
-      <h1 className="text-lg text-slate-600">Video</h1>
-       <h1 className="text-lg text-slate-600">followers</h1>
-       <h1 className="text-lg text-slate-600">following</h1>
+      <Link to="" className="text-lg"> 
+        <span className="font-semibold text-black">{images?.images?.length}</span> 
+          {images?.images?.length === 1 ? ' image' : ' images'}
+          </Link> 
+                     
+         <Link to="videos" className="text-lg">video</Link>
+         <h1 className="text-lg">followers</h1>
+          <h1 className="text-lg">following</h1>
       </div> 
 
 

@@ -1,22 +1,37 @@
 import React from 'react'
-import {Link, useNavigate} from 'react-router-dom' 
+import { useNavigate} from 'react-router-dom' 
 import {useState} from 'react' 
 import axios from 'axios' 
 
 
-function ImageUpload() { 
 
-  const navigate = useNavigate()
+
+function ImageUpload() {  
+
+
 const [image, setImage] = useState(null) 
 const [caption, setCaption] = useState('')  
 const [loading, setLoading] = useState(false) 
 
+const navigate = useNavigate()
 const token  = localStorage.getItem("token")  
+
 
 if(!token) {
   navigate('/login') 
   return
 }
+
+const getStoredImages = () => {
+  const storedImages = localStorage.getItem('ImagesId');
+  return storedImages ? JSON.parse(storedImages) : [];
+};
+
+// Function to store images in localStorage
+const storeImages = (images) => {
+  localStorage.setItem('ImagesId', JSON.stringify(images));
+};
+
 
 
 const handleSubmit = async() => {
@@ -31,8 +46,13 @@ const response = await axios.post('http://localhost:3001/post/image', formData, 
     Authorization: `Bearer ${token}`
   } 
 }) 
+
+
 if(response.status === 201) {
-  navigate('/profile')
+  const existingImages = getStoredImages();
+  const newImages = [...existingImages, response.data.images._id];
+  storeImages(newImages);
+   navigate('/profile') 
 }
 setLoading(false)
 }catch(err) {
@@ -42,9 +62,10 @@ setLoading(false)
 }
 
 
+
   return (
-    <div>
-    <div className="flex flex-col md:flex-row items-center justify-center gap-y-7">
+    <div className="w-[90%] md:w-[70%] lg:w-[60%] mx-auto border  my-9">
+    <div className="flex flex-col md:flex-row items-center my-6 justify-evenly gap-y-7">
         <div className="flex flex-col gap-y-2">
             <label className="text-xl" htmlFor='image'>Image</label> 
             <input type="file" id="image" accept='image/*'   
