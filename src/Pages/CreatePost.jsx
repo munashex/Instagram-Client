@@ -18,13 +18,11 @@ if(!token) {
     <div >
     <div className="my-6 flex flex-col items-center border  w-[90%] md:w-[60%] lg:w-[40%] mx-auto">  
        <div className="mx-3  border-none p-2">
-       <img src={instagramImage} className="w-32"/>
-       <h1 className="text-xl text-center">Create new post</h1>  
-        <h1 className="text-lg my-2">Choose between the image and the video below.</h1>
-       
+       <img src={instagramImage} className="w-32 mx-auto"/>
+       <h1 className="text-xl text-center">Post a Fresh Photograph</h1>  
+
        <div className="gap-x-8 my-5 flex flex-row justify-evenly">
-        <Link to="videoupload" className="border text-xl px-4 bg-[blue] text-white rounded-md">Video</Link> 
-        <Link to="imageupload" className="border text-xl px-4 bg-[blue] text-white rounded-md">Image</Link>
+        <button disabled  className="border w text-xl px-4 bg-[blue] text-white rounded-md">Image</button>
        </div> 
 
        </div> 

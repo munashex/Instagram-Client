@@ -22,15 +22,7 @@ if(!token) {
   return
 }
 
-const getStoredImages = () => {
-  const storedImages = localStorage.getItem('ImagesId');
-  return storedImages ? JSON.parse(storedImages) : [];
-};
 
-// Function to store images in localStorage
-const storeImages = (images) => {
-  localStorage.setItem('ImagesId', JSON.stringify(images));
-};
 
 
 
@@ -47,11 +39,8 @@ const response = await axios.post('http://localhost:3001/post/image', formData, 
   } 
 }) 
 
-
+console.log(response)
 if(response.status === 201) {
-  const existingImages = getStoredImages();
-  const newImages = [...existingImages, response.data.images._id];
-  storeImages(newImages);
    navigate('/profile') 
 }
 setLoading(false)

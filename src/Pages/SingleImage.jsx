@@ -13,7 +13,7 @@ const navigate = useNavigate()
 const {imageId} = useParams()
 const [image, setImage] = useState({}) 
 const [loading, setLoading] = useState(false)   
-console.log(image)
+
 
 const token = localStorage.getItem("token") 
 
@@ -69,7 +69,7 @@ const deleteImage  = async(id) => {
 }
 
   return (
-    <div>
+    <div className="my-8">
     {loading ? 
     <div className="flex flex-row justify-center"> 
   <Loader/>

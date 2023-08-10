@@ -13,14 +13,7 @@ const [bio, setBio] = useState('')
 const [image, setImage] = useState(null) 
 const [loading, setLoading] = useState(false)    
 
-const token = localStorage.getItem("token") 
 
-useEffect(() => {
-  if(token) {
-    navigate('/') 
-    return
-  }
-}, [])
 
 useEffect(() => {
   if(bio.length >= 31) { 
