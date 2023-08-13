@@ -1,26 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { IoIosArrowBack } from 'react-icons/io';
-import { useNavigate, Outlet, Link } from 'react-router-dom'; 
-import {useSelector} from 'react-redux'
+import { useNavigate, Outlet, Link, useLocation } from 'react-router-dom'; 
+import {useSelector, useDispatch} from 'react-redux' 
+import {getFollowing} from '../features/fetchUserFollowing'
 
 const Profile = () => {
   
   const {images} = useSelector((state) => state.userImages) 
+  const {following} = useSelector((state) => state.userFollowing)
+  const location = useLocation()
 
 
   const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); 
+  const userId = localStorage.getItem('userId')
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
+  const dispatch = useDispatch()
 
   const token = localStorage.getItem('token');
   if (!token) {
     navigate('/login');
   }
-
   
-  const userId = localStorage.getItem("userId")
+  //dispatching every time when user follow another user 
+  useEffect(() => {
+  dispatch(getFollowing(userId))
+  }, [dispatch])
+  
+  
 
   const getUser = async() => {
    try {
@@ -61,7 +70,7 @@ getUser()
        <div className="flex gap-x-5 mx-5 md:mx-0 md:justify-center my-7">
        
        <div>
-       <img className="md:w-28 w-24 rounded-full"  
+       <img className="md:w-32 w-28 rounded-full"  
        src={user?.image} alt={user?.username}
        />
        </div>
@@ -83,7 +92,8 @@ getUser()
        <div className="hidden lg:flex flex-row gap-x-7 text-lg">
        <h1>{images?.images?.length} posts</h1> 
        <h1>followers</h1> 
-       <h1>following</h1>
+       <Link to="userfollowing" className={`${location.pathname === '/profile/userfollowing' && `font-bold`}`}>
+        {following?.length} following</Link>
        </div>
 
        </div>
@@ -93,7 +103,8 @@ getUser()
       <div className="flex lg:hidden items-center justify-around border p-2 text-lg">
       <h1>{images?.images?.length} posts</h1> 
       <h1>followers</h1> 
-      <h1>following</h1>
+      <Link to="userfollowing" className={`${location.pathname === '/profile/userfollowing' && `font-bold`}`}>
+        {following?.length} following</Link>
       </div>
 
       <Outlet />

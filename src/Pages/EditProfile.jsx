@@ -63,17 +63,18 @@ function EditProfile() {
       <h1 className="text-2xl mb-2 mx-2">Edit Profile</h1>
 
       <div className="grid grid-cols-2 mx-2">
-        <label id="profile" className="text-lg text-blue-600">profile photo</label>
+        <label htmlFor="profile" className="text-lg text-blue-600">profile photo</label>
         <input type="file" accept='image/*' className="file:border-none file:bg-blue-600 
          file:text-white rounded-md"  
          required
+         id="profile"
          onChange={(e) => setImage(e.target.files[0])}
          /> 
         
        </div> 
 
        <div className="grid grid-cols-2 mx-2 mt-8">
-        <label id="profile" className="text-lg text-blue-600">Bio</label>
+        <label htmlFor='bio' className="text-lg text-blue-600">Bio</label>
       <textarea  className="border outline-none" 
       onChange={(e) => setBio(e.target.value)} id="bio" 
       required

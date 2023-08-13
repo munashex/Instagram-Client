@@ -10,6 +10,7 @@ import ImageUpload from "./components/ImageUpload"
 import UserImages from "./Pages/UserImages"
 import SingleImage from "./Pages/SingleImage" 
 import EditProfile from "./Pages/EditProfile"
+import CurrentUserFollowing from "./Pages/CurrentUserFollowing"
 
 const App = () => {
 
@@ -26,7 +27,8 @@ const App = () => {
       <Route path="profile"  element={<Profile/>}> 
       <Route  index element={<UserImages/>}/>  
       <Route path="editprofile" element={<EditProfile/>}/>
-      <Route path="singleimage/:imageId" element={<SingleImage/>}/>
+      <Route path="singleimage/:imageId" element={<SingleImage/>}/> 
+      <Route path="userfollowing" element={<CurrentUserFollowing/>}/>
       </Route>
       
       <Route path="create" element={<CreatePost/>}>
