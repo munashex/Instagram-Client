@@ -3,12 +3,15 @@ import axios from 'axios';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useNavigate, Outlet, Link, useLocation } from 'react-router-dom'; 
 import {useSelector, useDispatch} from 'react-redux' 
-import {getFollowing} from '../features/fetchUserFollowing'
+import {getFollowing} from '../features/fetchUserFollowing' 
+import { getFollowers } from '../features/fetchUserFollowers';
+
 
 const Profile = () => {
   
   const {images} = useSelector((state) => state.userImages) 
   const {following} = useSelector((state) => state.userFollowing)
+  const {followers} = useSelector((state) => state.userFollowers)
   const location = useLocation()
 
 
@@ -26,10 +29,12 @@ const Profile = () => {
   
   //dispatching every time when user follow another user 
   useEffect(() => {
-  dispatch(getFollowing(userId))
+  dispatch(getFollowing(userId)) 
+  dispatch(getFollowers(userId))
   }, [dispatch])
   
   
+ 
 
   const getUser = async() => {
    try {
@@ -53,6 +58,7 @@ const Profile = () => {
 useEffect(() => {
 getUser()
 }, []) 
+
 
 
   return (
@@ -90,10 +96,13 @@ getUser()
 
     
        <div className="hidden lg:flex flex-row gap-x-7 text-lg">
-       <h1>{images?.images?.length} posts</h1> 
-       <h1>followers</h1> 
-       <Link to="userfollowing" className={`${location.pathname === '/profile/userfollowing' && `font-bold`}`}>
-        {following?.length} following</Link>
+       <Link to="/profile">{images?.images?.length} posts</Link> 
+
+       <Link to="userfollowing" className={`${location.pathname === '/profile/userfollowing' && `font-bold`}`}> 
+       {following?.length} following</Link>
+
+      <Link to="userfollowers" className={`${location.pathname === '/profile/userfollowers' && `font-bold`}`}> 
+      {followers?.length} followers</Link>
        </div>
 
        </div>
@@ -101,10 +110,14 @@ getUser()
       </div> 
 
       <div className="flex lg:hidden items-center justify-around border p-2 text-lg">
-      <h1>{images?.images?.length} posts</h1> 
-      <h1>followers</h1> 
-      <Link to="userfollowing" className={`${location.pathname === '/profile/userfollowing' && `font-bold`}`}>
-        {following?.length} following</Link>
+      <Link to="/profile">{images?.images?.length} posts</Link> 
+      
+      <Link to="userfollowing" className={`${location.pathname === '/profile/userfollowing' && `font-bold`}`}> 
+       {following?.length} following</Link>
+
+      <Link to="userfollowers" className={`${location.pathname === '/profile/userfollowers' && `font-bold`}`}> 
+      {followers?.length} followers</Link>
+      
       </div>
 
       <Outlet />

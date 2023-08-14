@@ -29,34 +29,33 @@ useEffect(() => {
 
 
   return (
+    <div className="flex justify-center">
     <div>
-        {loading ? ( 
-        <div className="flex justify-center my-2">
-            <Loader/>
-        </div> 
-        ) : (
-        <div> 
-            {following && following.length === 0 ? null : (
-                  <div className="border mx-auto  max-w-md my-9">
-                  <div className="flex flex-col items-center my-7 md:my-10 "> 
-                      {following.map((user) => (
-                          <div key={user._id}>
-                          <div  className="flex flex-row gap-x-2"> 
-                            <img src={user.image} alt={user.username} className="w-20 rounded-full md:w-27"/> 
-                            <div className="my-2"> 
-                              <h1 className="font-semibold">{user.username}</h1> 
-                              <h1>{user.name}</h1> 
-                            </div>
-                          </div> 
-                          <h1 className="border-b my-3"></h1>
-                          </div>
-                      ))}
-                  </div> 
-                  </div>
-            )}
+      {loading ? (
+        <div className="flex justify-center">
+          <Loader />
         </div>
-        )}
+      ) : (
+        <div className="my-12">
+          {following?.length === 0 ? null : (
+            <div className="flex flex-col mx-auto gap-y-4">
+              {following.map((user) => (
+                <div key={user?._id} className="flex items-center">
+                  <div className="flex item-center">
+                    <img src={user?.image} alt={user?.username} className="w-20 rounded-full md:w-27" />
+                  </div>
+                  <div className="flex flex-col ml-2">
+                    <h1 className="mb-1">{user?.name}</h1>
+                    <h1 className="text-gray-600">@{user?.username}</h1>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
+  </div>
   )
 }
 
