@@ -5,7 +5,7 @@ import axios from 'axios'
 
 export const getFollowing = createAsyncThunk('/user/following', async (id) => {
     const token = localStorage.getItem("token")
- const response = await axios.get(`http://localhost:3001/user/following/${id}`, {
+ const response = await axios.get(`https://instagram-backend-onig.onrender.com/user/following/${id}`, {
     headers: {
         Authorization: `Bearer ${token}`
     }

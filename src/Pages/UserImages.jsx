@@ -60,7 +60,7 @@ function UserImages() {
                   {uploadedImages.map((image) => {
                     return (
                       <Link to={`singleimage/${image._id}`} key={image._id}>
-                        <img src={image.image} alt={`Image ${image._id}`} />
+                        <img src={image.image} alt={`${image._id}`} />
                       </Link>
                     );
                   })}

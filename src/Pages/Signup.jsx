@@ -18,7 +18,7 @@ const Signup = () => {
         e.preventDefault()  
         try {
         setLoading(true) 
-        const response = await axios.post('http://localhost:3001/api/user/register', {
+        const response = await axios.post('https://instagram-backend-onig.onrender.com/api/user/register', {
             name, email, username, password
         }, {
             headers: {

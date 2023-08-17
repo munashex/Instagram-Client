@@ -39,7 +39,7 @@ const Profile = () => {
   const getUser = async() => {
    try {
     setLoading(true)
-   const response = await axios.get(`http://localhost:3001/user/profile/${userId}`, {
+   const response = await axios.get(`https://instagram-backend-onig.onrender.com/user/profile/${userId}`, {
     headers: {
       "Content-Type": "application/json", 
       Authorization: `Bearer ${token}`
@@ -59,17 +59,24 @@ useEffect(() => {
 getUser()
 }, []) 
 
+const Logout = () => {
+  localStorage.clear() 
+  window.location.reload()
+}
 
 
   return (
     <div>
-      
+
+  
       {/* top nav for user on md and sm screens  */}
       <div className="border-b flex lg:hidden">
-      <div className="flex items-center justify-between  p-2 lg:hidden w-[50%]">
+      <div className="flex items-center justify-between  mx-3  w-[90%]  p-2 lg:hidden">
         <button onClick={() => navigate(-1)}><IoIosArrowBack size={45}/></button> 
-        <h1 className="text-xl">{user?.username}</h1>
-      </div>
+        <h1 className="text-xl">{user?.username}</h1> 
+        <button onClick={Logout} className="bg-blue-600 text-white px-2 text-lg rounded-md">logout</button>
+      </div> 
+
       </div>
       <div>
 
@@ -120,6 +127,7 @@ getUser()
       
       </div>
 
+   
       <Outlet />
     </div>
   );

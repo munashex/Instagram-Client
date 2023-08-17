@@ -3,13 +3,14 @@ import axios from 'axios';
 import Loader from '../components/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFollowers } from '../features/fetchUserFollowers';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link , useOutletContext} from 'react-router-dom';
 
-function CurrentUserFollowers() {
+function Followers() {
   const dispatch = useDispatch();
   const { loading, error, followers } = useSelector((state) => state.userFollowers);
-  const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
+  const {userid} = useOutletContext()
+  const userId = localStorage.getItem("userId")
 
   const token = localStorage.getItem("token");
 
@@ -19,8 +20,8 @@ function CurrentUserFollowers() {
   }
 
   useEffect(() => {
-    dispatch(getFollowers(userId));
-  }, []);
+    dispatch(getFollowers(userid));
+  }, [userid]);
 
   return (
     <div className="flex justify-center">
@@ -34,16 +35,17 @@ function CurrentUserFollowers() {
             {followers?.length === 0 ? null : (
               <div className="flex flex-col mx-auto gap-y-4">
                 {followers.map((user) => (
-                  <div key={user?._id} className="flex items-center">
-                    <Link to={`/user/${user.user}`} className="flex item-center">
+                  <Link key={user?._id} className="flex items-center" to={`${user.user === userId ? '/profile' : `/user/${user.user}`}`}>
+                    <h1  className="flex item-center">
                       <img src={user?.image} alt={user?.username} className="w-20 rounded-full md:w-27" />
-                    </Link>
-                    <Link to={`/user/${user.user}`} className="flex flex-col ml-2">
+                    </h1>
+                    <div className="flex flex-col ml-2">
                       <h1 className="mb-1">{user?.name}</h1>
-                      <Link to={`/user/${user.user}`} className="text-gray-600">@{user?.username}</Link>
-                    </Link>
-                  </div>
+                      <h1  className="text-gray-600">@{user?.username}</h1>
+                    </div>
+                  </Link>
                 ))}
+              
               </div>
             )}
           </div>
@@ -53,4 +55,4 @@ function CurrentUserFollowers() {
   );
 }
 
-export default CurrentUserFollowers;
+export default Followers;

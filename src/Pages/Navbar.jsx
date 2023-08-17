@@ -14,6 +14,10 @@ function Navbar() {
 
   const currentUser = localStorage.getItem("token") 
   const location = useLocation()
+
+  const Logout = () => {
+     localStorage.clear() 
+  }
   
   return (
   <div>
@@ -35,25 +39,27 @@ function Navbar() {
          <div className="space-y-7 mx-4 flex flex-col"> 
 
           <Link to="/" className="inline-flex items-center text-lg gap-x-3">
-            <LiaHomeSolid size={34} className={`${location.pathname === '/' && `text-blue-600`}`}/>Home
+            <LiaHomeSolid size={34} className={`${location.pathname === '/' && `text-[blue]`}`}/>Home
           </Link>
 
           <Link to="/search" className="inline-flex items-center text-lg gap-x-3"> 
-          <FiSearch size={34} className={`${location.pathname === '/search' && `text-blue-600`}`}/>
+          <FiSearch size={34} className={`${location.pathname === '/search' && `text-[blue]`}`}/>
           Search
           </Link> 
 
           <Link to="/create" className="inline-flex items-center text-lg gap-x-3">
-            <BsPlusSquare size={34} className={`${location.pathname === '/create' && `text-blue-600`}`}/>  
+            <BsPlusSquare size={34} className={`${location.pathname === '/create' && `text-[blue]`}`}/>  
           Create</Link>  
-         </div> 
-
-         <div className="fixed bottom-9 mx-4">
-         <Link to="/profile" className="inline-flex items-center  text-lg gap-x-3"> 
-         <HiOutlineUser  size={37} className={`${location.pathname === '/profile' && `text-blue-600`}`}/>  
+          
+          <Link to="/profile" className="inline-flex items-center  text-lg gap-x-3"> 
+         <HiOutlineUser  size={37} className={`${location.pathname === '/profile' && `text-[blue]`}`}/>  
          Profile</Link>
+
+
+          <button className="bg-blue-600 px-2 rounded-md text-white text-lg" onClick={Logout}>logout</button>
          </div> 
 
+         
          </div>
 
         </div>

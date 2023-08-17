@@ -15,7 +15,7 @@ const Login = () => {
       e.preventDefault() 
       try{
          setLoading(true)
-      const response = await axios.post('http://localhost:3001/api/user/login', {
+      const response = await axios.post('https://instagram-backend-onig.onrender.com/api/user/login', {
        email, password
       }, {
          headers: {
@@ -29,7 +29,7 @@ const Login = () => {
       localStorage.setItem("userId", _id)
       setLoading(false)   
       if(response.status === 200) {
-         navigate('/uploadprofile')
+          navigate('/uploadprofile')
       }
       }catch(err) {
          alert(err.response.data.message) 

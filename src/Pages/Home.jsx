@@ -54,7 +54,7 @@ function Home() {
   const getUsers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:3001/user/users', {
+      const response = await axios.get('https://instagram-backend-onig.onrender.com/user/users', {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -75,7 +75,7 @@ function Home() {
     try {
       setFollowLoading(true);
       const response = await axios.post(
-        `http://localhost:3001/user/follow/${id}`,
+        `https://instagram-backend-onig.onrender.com/user/follow/${id}`,
         null,
         {
           headers: {
@@ -95,7 +95,7 @@ function Home() {
     try {
       setUnFollowLoading(true);
       const response = await axios.post(
-        `http://localhost:3001/user/unfollow/${id}`,
+        `https://instagram-backend-onig.onrender.com/user/unfollow/${id}`,
         null,
         {
           headers: {
@@ -113,7 +113,7 @@ function Home() {
 
   const likeImage = async (id) => {
     try {
-      const response = await axios.post(`http://localhost:3001/user/like/${id}`, null, {
+      const response = await axios.post(`https://instagram-backend-onig.onrender.com/user/like/${id}`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
@@ -133,7 +133,7 @@ function Home() {
 
   const unlikeImage = async (id) => {
     try {
-      const response = await axios.post(`http://localhost:3001/user/unlike/${id}`, null, {
+      const response = await axios.post(`https://instagram-backend-onig.onrender.com/user/unlike/${id}`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
@@ -153,7 +153,7 @@ function Home() {
 
   const addComment = async(id) => {
    try {
-    const response = await axios.post(`http://localhost:3001/user/comment/${id}`,{comment: comment}, {
+    const response = await axios.post(`https://instagram-backend-onig.onrender.com/user/comment/${id}`,{comment: comment}, {
       headers: {
         "Content-Type": "application/json", 
         Authorization: `Bearer ${token}`
@@ -177,6 +177,7 @@ function Home() {
    }
   }
 
+console.log(users)
 
 
   return (
@@ -192,14 +193,14 @@ function Home() {
               <div key={user._id} className="flex flex-col gap-y-1 border bg-white p-4 rounded-lg">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-x-4">
-                    <Link to="/" className="text-lg font-bold">
+                    <Link to={`${userId === user?.user ? "/profile" : `/user/${user.user}`}`} className="text-lg font-bold">
                       {user?.username}
                     </Link>
                     {user?.user !== userId && (
                       <div className="text-[blue] text-lg">
                         {following?.find((userId) => userId.user === user.user) ?
-                          <button onClick={() => UnfollowUser(user?.user)}>following</button> :
-                          <button onClick={() => followUser(user?.user)}>follow</button>}
+                          <button onClick={() => UnfollowUser(user?.user)}>{unFollowLoading ? 'loading': 'following'}</button> :
+                          <button onClick={() => followUser(user?.user)}>{followLoading ? 'loading' : 'follow'}</button>}
                       </div>
                     )}
                   </div>
@@ -229,7 +230,7 @@ function Home() {
                 </div>
 
                 <div className="flex items-center gap-x-4">
-                  <Link to="/" className="text-lg font-semibold">
+                  <Link to={`${userId === user?.user ? "/profile" : `/user/${user.user}`}`} className="text-lg font-semibold">
                     {user?.username}
                   </Link>
                   <h1 className="text-lg flex flex-row">{user?.caption}</h1>

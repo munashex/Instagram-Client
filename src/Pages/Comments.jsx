@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Loader from '../components/Loader';
 
@@ -8,7 +8,8 @@ function Comments() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const { imageId } = useParams();
+  const { imageId } = useParams(); 
+  const userId = localStorage.getItem("userId")
 
   if (!token) {
     navigate('/login');
@@ -18,7 +19,7 @@ function Comments() {
   const getComments = async (id) => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:3001/user/comments/${id}`);
+      const response = await axios.get(`https://instagram-backend-onig.onrender.com/user/comments/${id}`);
       setComments(response.data);
       setLoading(false);
     } catch (err) {
@@ -31,7 +32,7 @@ function Comments() {
     getComments(imageId);
   }, [imageId]);
 
-
+console.log(comments)
 
   return (
     <div className="flex justify-center mt-8">
@@ -44,7 +45,7 @@ function Comments() {
             />
 
             <div className="flex items-center mt-2">
-              <h1 className="font-bold text-lg mr-2">{comments?.username}</h1>
+              <Link to={`${userId === comments?.user ? "/profile" : `/user/${comments?.user}`}`} className="font-bold text-lg mr-2">{comments?.username}</Link>
               {comments?.likes?.length === 0 ? null :
                 <p className="text-gray-600 text-sm">{comments?.likes?.length} {comments?.likes?.length === 1 ? 'like' : 'likes'}</p>}
             </div>

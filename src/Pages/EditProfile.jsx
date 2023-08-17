@@ -41,7 +41,7 @@ function EditProfile() {
   
     const token = localStorage.getItem("token") 
   
-     const response = await axios.put('http://localhost:3001/user/editprofile', formData, {
+     const response = await axios.put('https://instagram-backend-onig.onrender.com/user/editprofile', formData, {
       headers: {
         "Content-Type": "multipart/form-data", 
         Authorization: `Bearer ${token}`

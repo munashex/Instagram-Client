@@ -36,7 +36,7 @@ const handleSubmit = async(e) => {
 
   const token = localStorage.getItem("token") 
 
-   const response = await axios.post('http://localhost:3001/user/profile', formData, {
+   const response = await axios.post('https://instagram-backend-onig.onrender.com/user/profile', formData, {
     headers: {
       "Content-Type": "multipart/form-data", 
       Authorization: `Bearer ${token}`

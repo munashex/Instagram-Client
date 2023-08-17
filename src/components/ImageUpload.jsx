@@ -32,7 +32,7 @@ setLoading(true)
 const formData = new FormData()  
 formData.append("image", image) 
 formData.append("caption", caption)
-const response = await axios.post('http://localhost:3001/post/image', formData, {
+const response = await axios.post('https://instagram-backend-onig.onrender.com/post/image', formData, {
   headers: {
     "Content-Type": "multipart/form-data", 
     Authorization: `Bearer ${token}`

@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const getImages = createAsyncThunk('user/images', async() => {
     const token = localStorage.getItem("token")
- const response = await axios.get('http://localhost:3001/post/images', {
+ const response = await axios.get('https://instagram-backend-onig.onrender.com/post/images', {
     headers: {
         "Content-Type": "application/json", 
         Authorization: `Bearer ${token}`
