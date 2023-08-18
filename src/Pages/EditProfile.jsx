@@ -58,7 +58,7 @@ function EditProfile() {
 
 
   return (
-    <form className="mx-auto w-[90%]  md:w-[70%] lg:w-[50%] border p-3 mt-12" onSubmit={handleSubmit}>
+    <form className="mx-auto w-[90%] mb-60 md:w-[70%] lg:w-[50%] border p-3 mt-12" onSubmit={handleSubmit}>
       
       <h1 className="text-2xl mb-2 mx-2">Edit Profile</h1>
 

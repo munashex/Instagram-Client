@@ -1,6 +1,7 @@
 import {useState} from 'react'  
 import {Link, useNavigate} from 'react-router-dom' 
 import axios from 'axios'
+import { Helmet } from 'react-helmet-async'
  
 let instagramImage = 'https://1000logos.net/wp-content/uploads/2017/02/Logo-Instagram.png' 
 
@@ -40,6 +41,9 @@ const Signup = () => {
 
     return (
        <div>
+        <Helmet>
+            <title>sign up</title>
+        </Helmet>
          <div className="my-5 max-w-md border mx-auto">  
 
 <div className="flex flex-col items-center">

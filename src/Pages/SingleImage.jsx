@@ -21,7 +21,7 @@ function SingleImage() {
   const getImage = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:3001/post/image/${imageId}`, {
+      const response = await axios.get(`https://instagram-backend-onig.onrender.com/post/image/${imageId}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,

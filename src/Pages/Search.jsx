@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async'
+ 
 
 function Search() {
   const [search, setSearch] = useState('');
@@ -18,6 +20,9 @@ function Search() {
 
   return (
     <div className="">
+      <Helmet>
+        <title>Search</title>
+      </Helmet>
       <h1 className="text-center text-4xl font-thin my-6">Search</h1>
 
       <div className="mx-auto w-fit">

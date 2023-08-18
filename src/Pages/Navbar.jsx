@@ -17,6 +17,7 @@ function Navbar() {
 
   const Logout = () => {
      localStorage.clear() 
+     window.location.reload()
   }
   
   return (
@@ -34,8 +35,9 @@ function Navbar() {
         <div className="fixed top-0 bottom-0 left-0 w-[15%] border border-r-2">
 
          <div className="flex flex-col items-center"> 
+        
          <img src={instagramImage} alt="instagram" className="w-[70%]"/> 
-
+        
          <div className="space-y-7 mx-4 flex flex-col"> 
 
           <Link to="/" className="inline-flex items-center text-lg gap-x-3">

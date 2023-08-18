@@ -19,12 +19,13 @@ import Followers from "./Pages/Followers"
 import Following from "./Pages/Following"
 import Search from "./Pages/Search"
 import SearchedUser from "./Pages/SearchedUser"
-
+import {HelmetProvider} from 'react-helmet-async'
 
 const App = () => {
 
   return (
     <div className="w-screen">
+      <HelmetProvider>
     <BrowserRouter>  
     <Routes>  
     <Route path="/login" element={<Login/>}/> 
@@ -60,6 +61,7 @@ const App = () => {
       </Route>
     </Routes>
     </BrowserRouter> 
+    </HelmetProvider>
     </div>
   )
 }

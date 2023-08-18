@@ -5,6 +5,7 @@ import { useNavigate, Outlet, Link, useLocation } from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux' 
 import {getFollowing} from '../features/fetchUserFollowing' 
 import { getFollowers } from '../features/fetchUserFollowers';
+import { Helmet } from 'react-helmet-async';
 
 
 const Profile = () => {
@@ -67,7 +68,10 @@ const Logout = () => {
 
   return (
     <div>
-
+    
+    <Helmet>
+      <title>{user?.username}</title>
+    </Helmet>
   
       {/* top nav for user on md and sm screens  */}
       <div className="border-b flex lg:hidden">
@@ -97,7 +101,7 @@ const Logout = () => {
         
        <div className="flex  gap-x-3">
        <h1 className="text-lg font-semibold">{user?.name}</h1> 
-       <Link to="editprofile" className="px-2 py-0.5  rounded-md text-lg text-white bg-blue-600">Edit Profile</Link> 
+       <Link to="editprofile" className="px-2 py-0.5  rounded-md text-lg text-white bg-blue-600">Edit</Link> 
        </div> 
        
 

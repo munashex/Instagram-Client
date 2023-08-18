@@ -1,5 +1,7 @@
 import React from 'react' 
 import { Link, Outlet } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
+ 
 
 let instagramImage = 'https://1000logos.net/wp-content/uploads/2017/02/Logo-Instagram.png'
 
@@ -16,6 +18,9 @@ if(!token) {
 
   return (
     <div >
+      <Helmet>
+        <title>Create</title>
+      </Helmet>
     <div className="my-6 flex flex-col items-center border  w-[90%] md:w-[60%] lg:w-[40%] mx-auto">  
        <div className="mx-3  border-none p-2">
        <img src={instagramImage} className="w-32 mx-auto"/>
